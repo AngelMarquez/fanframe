@@ -38,6 +38,14 @@ user; set `-e PUID=1000 -e PGID=1000` (or whatever owns your appdata) to change 
 Behind a reverse proxy it works at the root of a host name or under a sub-path (`/fanframe/`, with
 the trailing slash).
 
+### Unraid
+
+Install **Fanframe** from Community Apps (once it's listed), or add the template by hand: Docker tab →
+**Add Container** → **Template repositories**, add `https://github.com/AngelMarquez/fanframe`, then pick
+Fanframe. Fill in **Jellyfin URL** (your server's LAN address, e.g. `http://192.168.1.10:8096`),
+**Jellyfin API key** and a **Password**. Appdata goes to `/mnt/user/appdata/fanframe`. The template is
+[`unraid/fanframe.xml`](unraid/fanframe.xml).
+
 ### From source
 
 ```bash
