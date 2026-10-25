@@ -1,6 +1,7 @@
 # Builds the Docker image and publishes it to GitHub Container Registry:
-#   ghcr.io/<owner>/fanframe:latest      every push to main
-#   ghcr.io/<owner>/fanframe:1.2.3, :1.2  a tag v1.2.3
+#   ghcr.io/<owner>/fanframe:1.2.3, :1.2, :latest   a release tag v1.2.3 (latest = newest release,
+#                                                    metadata-action's default latest=auto flavor)
+#   ghcr.io/<owner>/fanframe:edge                    every push to main
 # Pull requests only build (no push). amd64 and arm64.
 name: image
 
@@ -51,7 +52,7 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository_owner }}/fanframe
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=edge,enable={{is_default_branch}}
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=sha,format=short

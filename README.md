@@ -30,8 +30,8 @@ docker run -d --name fanframe \
   ghcr.io/angelmarquez/fanframe:latest
 ```
 
-Then open `http://<host>:8765`. Images are built for amd64 and arm64; `:latest` follows the main
-branch, release tags (`:1.0.0`, `:1.0`) stay put. To build it yourself: `docker build -t fanframe .`
+Then open `http://<host>:8765`. Images are built for amd64 and arm64. `:latest` is the newest release
+(also `:1.0.0`, `:1.0`); `:edge` follows the main branch. The version shows at the bottom of the sidebar. To build it yourself: `docker build -t fanframe .`
 The server gives `/config` to `PUID`:`PGID` (default `99:100`, Unraid's `nobody:users`) and runs as that
 user; set `-e PUID=1000 -e PGID=1000` (or whatever owns your appdata) to change it.
 
