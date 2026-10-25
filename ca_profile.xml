@@ -1,0 +1,11 @@
+<CommunityApplications>
+  <Profile>
+**Fanframe** is an artwork editor for Jellyfin: hand-pick, crop and save backdrops, posters, thumbs, logos and banners, with provider art, a Jellyfin preview, Undo and History.
+
+One app in this repository. Questions and bug reports: [GitHub issues](https://github.com/AngelMarquez/fanframe/issues).
+  </Profile>
+  <Icon>https://raw.githubusercontent.com/AngelMarquez/fanframe/main/unraid/fanframe.png</Icon>
+  <WebPage>https://github.com/AngelMarquez/fanframe</WebPage>
+  <Photo>https://raw.githubusercontent.com/AngelMarquez/fanframe/main/docs/screenshot-backdrop.jpg</Photo>
+  <Photo>https://raw.githubusercontent.com/AngelMarquez/fanframe/main/docs/screenshot-poster.jpg</Photo>
+</CommunityApplications>
