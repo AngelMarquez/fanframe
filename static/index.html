@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fanframe</title>
+  <link rel="stylesheet" href="static/vendor/cropper.min.css">
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <!-- ============ shows ============ -->
+  <aside id="side">
+    <div class="side-head">
+      <h1>Fanframe</h1>
+      <input id="search" type="search" placeholder="Search all libraries  ( / )" autocomplete="off">
+      <div id="libs" class="chips"></div>
+      <div class="row2">
+        <select id="filter" title="Show only">
+          <option value="all">All shows</option>
+          <option value="todo">Not done yet</option>
+          <option value="done">Done ✓</option>
+          <option value="lowres">Low-res backdrop ⚠</option>
+          <option value="none">No backdrop ∅</option>
+        </select>
+        <select id="sort" title="Sort">
+          <option value="name">A–Z</option>
+          <option value="fewest">Fewest backdrops</option>
+        </select>
+      </div>
+      <div id="count" class="muted"></div>
+    </div>
+    <ul id="items"></ul>
+    <div class="side-foot">
+      <button id="log-btn" type="button" class="ghost small">Activity</button>
+      <button id="help-btn" type="button" class="ghost small" title="Keyboard shortcuts">Keys  ?</button>
+    </div>
+  </aside>
+
+  <!-- ============ stage ============ -->
+  <main id="main">
+    <div id="empty" class="empty">
+      <strong>Pick a show or movie on the left.</strong>
+      <span>↑ ↓ moves through the list.</span>
+    </div>
+
+    <section id="editor" hidden>
+      <header class="ed-head">
+        <div class="title-wrap">
+          <h2 id="title"></h2>
+          <a id="open-jf" target="_blank" rel="noopener" title="Open this item in Jellyfin">Open in Jellyfin ↗</a>
+          <button id="history-btn" type="button" class="ghost small">History</button>
+        </div>
+        <div class="types" id="types"></div>
+      </header>
+
+      <div id="stage" class="stage">
+        <div id="view" class="view">
+          <img id="view-img" alt="">
+          <div id="view-empty" class="view-empty" hidden>
+            <strong id="view-empty-title">No image here yet</strong>
+            <span>Drop an image anywhere, paste one (Ctrl+V), pick one from Provider art, or</span>
+            <button id="browse" type="button">Choose file…</button>
+          </div>
+        </div>
+        <div id="crop-wrap" hidden><img id="crop-img" alt=""></div>
+        <div id="preview" class="preview" hidden>
+          <div class="pv-shade"></div>
+          <div class="pv-text"><img id="pv-logo" alt=""><div id="pv-title"></div><div class="pv-meta" id="pv-meta"></div></div>
+        </div>
+        <img id="compare-img" class="compare" alt="" hidden>
+        <div id="compare-tag" class="compare-tag" hidden>Current image (release Space for your draft)</div>
+        <div id="stage-lock" class="stage-lock" hidden></div>
+        <input id="file" type="file" accept="image/*" hidden>
+      </div>
+
+      <div class="bar">
+        <div id="info" class="muted"></div>
+        <div class="bar-actions">
+          <label class="toggle" title="Show the dark fade, logo and title Jellyfin draws over a backdrop (P)">
+            <input id="pv-toggle" type="checkbox"> Jellyfin preview
+          </label>
+          <span id="draft-actions" hidden>
+            <button id="reset" type="button" class="ghost" title="Fit the crop box to the whole image again">Reset crop</button>
+            <button id="cancel" type="button" class="ghost" title="Esc">Cancel</button>
+            <button id="save" type="button" class="primary" title="Enter"></button>
+          </span>
+        </div>
+      </div>
+
+      <div class="film-wrap">
+        <div id="film" class="film"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ provider art ============ -->
+  <aside id="rail">
+    <div class="rail-head">
+      <h3>Provider art</h3>
+      <button id="rail-close" type="button" class="ghost small" title="Close">✕</button>
+    </div>
+    <div id="remote-filters" class="chips"></div>
+    <div id="remote-grid" class="remote-grid"><span class="none">Pick a show first.</span></div>
+  </aside>
+  <button id="rail-open" type="button" class="rail-open">Provider art</button>
+
+  <!-- ============ overlays ============ -->
+  <div id="drop-veil" class="drop-veil" hidden><div>Drop to load into <b id="drop-target"></b></div></div>
+
+  <div id="history" class="panel" hidden>
+    <div class="panel-head"><h3>History</h3><button type="button" class="ghost small" data-close>✕</button></div>
+    <p class="muted">Each entry is how the images looked <b>before</b> that change. Restore puts them back (and is itself undoable).</p>
+    <div id="history-list"></div>
+  </div>
+
+  <div id="log" class="panel" hidden>
+    <div class="panel-head"><h3>Activity</h3><button type="button" class="ghost small" data-close>✕</button></div>
+    <ol id="log-list"></ol>
+  </div>
+
+  <div id="help" class="panel" hidden>
+    <div class="panel-head"><h3>Keyboard</h3><button type="button" class="ghost small" data-close>✕</button></div>
+    <table class="keys">
+      <tr><td>↑ ↓</td><td>Previous / next show</td></tr>
+      <tr><td>← →</td><td>Previous / next image slot</td></tr>
+      <tr><td>1–5</td><td>Backdrop, Poster, Thumb, Logo, Banner</td></tr>
+      <tr><td>/</td><td>Search</td></tr>
+      <tr><td>Ctrl+V</td><td>Paste an image or image link</td></tr>
+      <tr><td>Enter</td><td>Save the draft</td></tr>
+      <tr><td>Esc</td><td>Cancel the draft / close a panel</td></tr>
+      <tr><td>Space (hold)</td><td>Compare draft with the current image</td></tr>
+      <tr><td>P</td><td>Jellyfin preview on/off</td></tr>
+      <tr><td>F</td><td>Make the selected backdrop first</td></tr>
+      <tr><td>Delete</td><td>Delete the selected image (asks first)</td></tr>
+      <tr><td>?</td><td>This list</td></tr>
+    </table>
+  </div>
+
+  <div id="toasts" aria-live="polite"></div>
+
+  <script src="static/vendor/cropper.min.js"></script>
+  <script src="static/app.js"></script>
+</body>
+</html>

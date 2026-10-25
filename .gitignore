@@ -1,0 +1,7 @@
+# Holds the Jellyfin API key
+config.json
+# Originals saved before each push (Undo reads these)
+backups/
+__pycache__/
+# Which items were changed here (sidebar "done" badge)
+custom.json

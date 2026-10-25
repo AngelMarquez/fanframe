@@ -1,0 +1,4 @@
+# Keep line endings as written (LF); vendored files byte-for-byte as published.
+* text=auto eol=lf
+*.cmd text eol=crlf
+static/vendor/** -text

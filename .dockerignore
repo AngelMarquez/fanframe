@@ -1,0 +1,5 @@
+# Only the app goes into the image: never local settings, keys or backups.
+*
+!Dockerfile
+!server.py
+!static/

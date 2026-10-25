@@ -1,0 +1,7 @@
+{
+  "url": "http://192.168.1.10:8096",
+  "api_key": "paste a key from Jellyfin: Dashboard > API Keys > +",
+  "public_url": "",
+  "password": "",
+  "media_readonly": true
+}
