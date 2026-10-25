@@ -74,7 +74,8 @@ h1 {
 .badge.done { color: var(--good); border-color: #3fb37f66; }
 .badge.low { color: var(--warn); border-color: #e0a03066; }
 .badge.none { color: var(--bad); border-color: #e0555566; }
-.side-foot { display: flex; justify-content: space-between; padding: 8px 10px; border-top: 1px solid var(--line); }
+.side-foot { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; border-top: 1px solid var(--line); }
+#version { font-size: 11px; }
 
 /* ---------- main ---------- */
 #main { min-width: 0; min-height: 0; display: flex; }

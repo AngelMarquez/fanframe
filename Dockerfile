@@ -2,7 +2,10 @@
 # Standard library only, so the image is just Python plus the app.
 FROM python:3.11-slim
 
-ENV PYTHONUNBUFFERED=1 \
+# Version shown in the app and /api/ping; the workflow passes the tag (1.2.3) or main-<sha>.
+ARG VERSION=dev
+ENV FANFRAME_VERSION=$VERSION \
+    PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PUID=99 \
     PGID=100 \

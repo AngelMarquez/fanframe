@@ -15,7 +15,8 @@ Setup: create an API key in Jellyfin (Dashboard, API Keys, +) and enter it below
   <ReadMe>https://raw.githubusercontent.com/AngelMarquez/fanframe/main/README.md</ReadMe>
   <Category>MediaApp:Video Tools:Utilities</Category>
   <ExtraSearchTerms>jellyfin artwork backdrop poster fanart logo banner crop images</ExtraSearchTerms>
-  <Changes>Initial release.</Changes>
+  <Changes>### 1.0.0&#xD;
+First release.</Changes>
   <WebUI>http://[IP]:[PORT:8765]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/AngelMarquez/fanframe/main/unraid/fanframe.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/AngelMarquez/fanframe/main/unraid/fanframe.png</Icon>

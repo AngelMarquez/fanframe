@@ -624,7 +624,9 @@ async function init() {
   state.preview = lsGet("preview") === "1";
   $("pv-toggle").checked = state.preview;
   try {
-    state.jellyfin = (await api("api/config")).jellyfin;
+    const cfg = await api("api/config");
+    state.jellyfin = cfg.jellyfin;
+    $("version").textContent = /^\d/.test(cfg.version) ? `v${cfg.version}` : cfg.version;
     await loadItems();
     const want = readHash();
     if (want.type) { state.type = want.type; renderTypes(); }

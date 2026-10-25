@@ -36,6 +36,8 @@ BACKUPS = DATA / "backups"
 CUSTOM = DATA / "custom.json"
 HOST = os.environ.get("FANFRAME_HOST", "127.0.0.1")
 PORT = int(os.environ.get("FANFRAME_PORT", "8765"))
+# Set at image build time from the git tag (Dockerfile ARG VERSION); "dev" when run from source.
+VERSION = os.environ.get("FANFRAME_VERSION") or "dev"
 
 
 def load_settings():
@@ -444,9 +446,9 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(200, f.read_bytes(), ctype + "; charset=utf-8")
             return self.send(404, {"error": "not found"})
         if m == "GET" and p == "/api/ping":
-            return self.send(200, {"app": "fanframe"})
+            return self.send(200, {"app": "fanframe", "version": VERSION})
         if m == "GET" and p == "/api/config":
-            return self.send(200, {"jellyfin": JF_PUBLIC})
+            return self.send(200, {"jellyfin": JF_PUBLIC, "version": VERSION})
         if m == "GET" and p == "/api/items":
             return self.send(200, all_items())
 
@@ -579,7 +581,7 @@ if __name__ == "__main__":
         webbrowser.open(url)
         sys.exit(0)
     srv = Server((HOST, PORT), Handler)
-    print(f"Fanframe on {HOST}:{PORT}  (Jellyfin: {JF}, data: {DATA})  Ctrl+C to stop", flush=True)
+    print(f"Fanframe {VERSION} on {HOST}:{PORT}  (Jellyfin: {JF}, data: {DATA})  Ctrl+C to stop", flush=True)
     if "--no-browser" not in sys.argv:
         threading.Timer(0.5, webbrowser.open, [url]).start()
     try:
